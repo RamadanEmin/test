@@ -153,7 +153,7 @@ const ProductDetails = () => {
                                 <RatingsComponent value={data?.product?.ratings || 0} />(
                                 {data?.product?.numOfReviews} reviews)
                             </em>
-                            <h3>₹{data?.product?.price}</h3>
+                            <h3>{data?.product?.price} лв.</h3>
                             <article>
                                 <div>
                                     <button onClick={decrement}>-</button>
