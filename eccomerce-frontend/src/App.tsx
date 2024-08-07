@@ -1,6 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { lazy, Suspense, useEffect } from 'react';
-import Loader from './components/loader';
+import Loader, { LoaderLayout } from './components/loader';
 import Header from './components/header';
 import { Toaster } from 'react-hot-toast';
 import { onAuthStateChanged } from 'firebase/auth';
@@ -10,6 +10,7 @@ import { userExist, userNotExist } from './redux/reducer/userReducer';
 import { getUser } from './redux/api/userAPI';
 import { RootState } from './redux/store';
 import ProtectedRoute from './components/protected-route';
+import Footer from './components/footer';
 
 const Cart = lazy(() => import('./pages/cart'));
 const Home = lazy(() => import('./pages/home'));
@@ -31,12 +32,11 @@ const Piecharts = lazy(() => import('./pages/admin/charts/piecharts'));
 const Linecharts = lazy(() => import('./pages/admin/charts/linecharts'));
 const Coupon = lazy(() => import('./pages/admin/apps/coupon'));
 const NewProduct = lazy(() => import('./pages/admin/management/newproduct'));
-const ProductManagement = lazy(
-    () => import('./pages/admin/management/productmanagement')
-);
-const TransactionManagement = lazy(
-    () => import('./pages/admin/management/transactionmanagement')
-);
+const ProductManagement = lazy(() => import('./pages/admin/management/productmanagement'));
+const TransactionManagement = lazy(() => import('./pages/admin/management/transactionmanagement'));
+const Discount = lazy(() => import('./pages/admin/discount'));
+const DiscountManagement = lazy(() => import('./pages/admin/management/discountmanagement'));
+const NewDiscount = lazy(() => import('./pages/admin/management/newdiscount'));
 
 const App = () => {
     const { user, loading } = useSelector((state: RootState) => state.userReducer);
@@ -62,7 +62,7 @@ const App = () => {
             <Router>
                 <Header user={user} />
 
-                <Suspense fallback={<Loader />}>
+                <Suspense fallback={<LoaderLayout />}>
                     <Routes>
                         <Route path='/' element={<Home />} />
                         <Route path='/search' element={<Search />} />
@@ -97,22 +97,21 @@ const App = () => {
                             <Route path='/admin/product' element={<Products />} />
                             <Route path='/admin/customer' element={<Customers />} />
                             <Route path='/admin/transaction' element={<Transaction />} />
-
+                            <Route path='/admin/discount' element={<Discount />} />
                             <Route path='/admin/chart/bar' element={<Barcharts />} />
                             <Route path='/admin/chart/pie' element={<Piecharts />} />
                             <Route path='/admin/chart/line' element={<Linecharts />} />
-
                             <Route path='/admin/app/coupon' element={<Coupon />} />
-
                             <Route path='/admin/product/new' element={<NewProduct />} />
-
                             <Route path='/admin/product/:id' element={<ProductManagement />} />
-
                             <Route path='/admin/transaction/:id' element={<TransactionManagement />} />
+                            <Route path='/admin/discount/new' element={<NewDiscount />} />
+                            <Route path='/admin/discount/:id' element={<DiscountManagement />} />
                         </Route>
                         <Route path='*' element={<NotFound />} />
                     </Routes>
                 </Suspense >
+                <Footer />
                 <Toaster position='bottom-center' />
             </Router>
         );

@@ -4,7 +4,6 @@
     }
 
     .dashboard {
-
         .widget-container,
         .graph-container,
         .transaction-container {
@@ -225,14 +224,6 @@
 
         >section {
             margin: 8rem auto;
-        }
-    }
-
-    .dashboard-app-container>section {
-
-        .coupon-form {
-            display: flex;
-            flex-direction: column;
         }
     }
 }

@@ -147,3 +147,9 @@ export type Line = {
     discount: number[];
     revenue: number[];
 };
+
+export type CouponType = {
+    code: string;
+    amount: number;
+    _id: string;
+};

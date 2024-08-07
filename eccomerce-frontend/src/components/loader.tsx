@@ -29,3 +29,16 @@ export const Skeleton = ({
         </div>
     );
 };
+
+export const LoaderLayout = () => {
+    return (
+        <section
+            style={{
+                height: "calc(100vh - 4rem)",
+            }}
+            className="loader"
+        >
+            <div></div>
+        </section>
+    );
+};
